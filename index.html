@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css" media="screen">
-    <title>Net Income Calculator</title>
+    <title>Journal</title>
       <script type="text/javascript" src="javascript/jquery-3.1.1.min.js"></script>
       <script type="text/javascript" src="javascript/bootstrap.min.js"></script>
       <script type="text/javascript" src="app.bundle.js"></script>
   </head>
   <body>
-  <h1>Income Calculator
+  <h1>Journal
       <span id="account-settings-button" class="toggle-account-settings">
           <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
       </span>
@@ -22,109 +22,12 @@
   </div>
   <div class="container">
       <form id="input-form" class="container-fluid form">
-          <h2 class="hide">Optional Load a Budget</h2>
-          <div class="hide form-group">
-              <label class="form-label">URL</label>
-              <input id="budget-url" class="form-control" type="text" />
-          </div>
-          <input id="load-budget" type="button" value="Load" class="hide btn btn-primary" />
-          <h2>Budget</h2>
-          <p>
-              Enter your biweekly income and expenses.
-              Then you will be shown your transactions on a calendar.
-          </p>
-          <h3>
-              Biweekly Income
-          </h3>
-          <div id="biweekly-input-group" class="form-group">
-              <div class="input-group">
-                  <div class="input-group-addon">$</div>
-                  <input id="biweekly-input" type="text" class="form-control" value="1" />
-                  <div class="input-group-addon">.00</div>
-              </div>
-          </div>
-
-          <h3>
-              Monthly Expenses
-              <button id="add-new-monthly" type="button" class="btn btn-success pull-right">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              </button>
-          </h3>
-          <div id="monthly-input-group" class="form-group"></div>
-
-          <h3>
-              Weekly Expenses
-              <button id="add-new-weekly" type="button" class="btn btn-success pull-right">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              </button>
-          </h3>
-          <div id="weekly-input-group" class="form-group"></div>
-
-          <h3>
-              One Time Transactions
-              <button id="add-new-one-time-expense" type="button" class="btn btn-success pull-right">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              </button>
-          </h3>
-          <div id="one-time-input-group" class="form-group"></div>
-
-          <h3>
-              Actual Expenses
-              <button id="add-new-actual-expense" type="button" class="btn btn-success pull-right">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              </button>
-          </h3>
-          <div id="actuals-input-group" class="form-group"></div>
-
-          <h3>
-              Loans
-              <button id="add-new-balance" type="button" class="btn btn-success pull-right">
-                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              </button>
-          </h3>
-          <div id="balance-input-group" class="form-group"></div>
-
-          <input id="project" type="button" value="Save &amp; View Payment Schedule" class="btn btn-primary" />
+          <div></div>
+          <button type="button" id="save">Save</button>
       </form>
   </div>
-  <div id="months-container" class="container-fluid"></div>
+
   <div id="debug-console"></div>
-
-  <div class="modal fade" id="account-settings-view" role="dialog">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h2 class="modal-title">Account Settings</h2>
-              </div>
-              <div class="modal-body">
-                  <form>
-                      <div class="form-group">
-                          <label for="awsBucket">AWS Bucket</label>
-                          <input type="email" class="form-control" id="awsBucket">
-                      </div>
-                      <div class="form-group">
-                          <label for="budgetName">Budget Name</label>
-                          <input type="text" class="form-control" id="budgetName">
-                      </div>
-                      <div class="form-group">
-                          <label for="awsAccessKeyId">Access Key Id</label>
-                          <input type="text" class="form-control" id="awsAccessKeyId">
-                      </div>
-                      <div class="form-group">
-                          <label for="awsSecretAccessKey">Secret Access Key</label>
-                          <input type="text" class="form-control" id="awsSecretAccessKey">
-                      </div>
-                  </form>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button id="account-settings-save-close-button" type="button" class="btn btn-primary">Save &amp; Close</button>
-              </div>
-          </div>
-      </div>
-  </div>
-
 
   </body>
 </html>
