@@ -45,14 +45,14 @@ h3 > .btn-success {
     margin-bottom: 0px;
 }
 
-.toggle-account-settings {
+.save {
     display: inline-block;
     float: right;
     cursor: pointer;
     margin-right: 3px;
 }
 
-.toggle-account-settings > span {
+.save > span {
     font-size: .8em;
 }
 
@@ -64,114 +64,6 @@ h3 > .btn-success {
     margin-bottom: 15px;
 }
 
-.transaction-input-view {
-    margin-bottom: 10px;
-}
-
-.transaction-input-view .amount {
-    width: 100%;
-}
-
-.transaction-input-view .date {
-    width: 100%;
-}
-
-.transaction-input-view .name {
-    width: 100%;
-}
-
-/* with a budget */
-.transaction-input-view.actual-expense-item .amount {
-    width: 100%;
-}
-
-.transaction-input-view.actual-expense-item .date {
-    width: 24%;
-}
-
-.transaction-input-view.actual-expense-item .name {
-    width: 38%;
-}
-
-.transaction-input-view.actual-expense-item .budget {
-    width: 38%;
-}
-
-.transaction-input-view > .remove {
-    background-color: #d9534f;
-    color: white;
-    cursor: pointer;
-}
-
-.transaction-input-view > .remove:hover {
-    background-color: #c9302c;
-    border-color: #ac2925;
-}
-
-.inline-group {
-    display: inline-block;
-    width: auto;
-}
-
-.week-name {
-    text-align: center;
-    font-size: 1.2em;
-}
-
-.transaction-view > .name {
-    display: inline-block;
-    float: left;
-}
-
-.transaction-view > .amount {
-    text-align: right;
-    padding-right: 3px;
-    box-shadow: 0px 0px 3px #999;
-}
-
-.transaction-view.expense,
-.transaction-view.net.negative {
-    background-color: #ffcccc;
-}
-
-.transaction-view.expense.budgeted,
-.transaction-view.expense.budgeted {
-    background-color: #fbfbba;
-}
-
-.transaction-view.expense.unbudgeted {
-    border-bottom: 1px solid rgb(255, 69, 0);
-}
-
-.transaction-view.income,
-.transaction-view.net.positive {
-    background-color: #ccffb6;
-}
-
-.day-view {
-    box-shadow: -1px -1px 2px #888;
-    min-height: 100px;
-}
-
-.totals-view {
-    font-weight: bold;
-}
-
-.day-col {
-    width: 12.5%;
-    padding-left: 0px;
-    padding-right: 0px;
-}
-
-.day-view > .calendar-day-number {
-    font-size: .7em;
-    font-weight: bold;
-}
-
-.day-view.out-of-month {
-    background-color: #eee;
-}
-
-.day-view.out-of-month > .calendar-day-number {
-    color: #888;
+#input {
+    width: 80%;
 }
