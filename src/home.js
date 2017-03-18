@@ -16,6 +16,45 @@ function Home() {
         return urlParams;
     }
 
+    function loadEntries(s3, bucket, continuationToken) {
+        $('#journal-entries').empty();
+        var listParams = {};
+        listParams.Bucket = bucket;
+        listParams.MaxKeys = 6;
+        if (continuationToken) {
+            console.log(continuationToken);
+            listParams.ContinuationToken = continuationToken;
+        }
+        s3.listObjectsV2(listParams, function(err, data) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+
+            console.log(data);
+            continuationToken = data.NextContinuationToken;
+            console.log(continuationToken);
+
+            var objectIndex = 0;
+            for(objectIndex; objectIndex < data.Contents.length; objectIndex++) {
+                $('#journal-entries').append(
+                    '<div class="journal-entry-listing">' +
+                    data.Contents[objectIndex].Key +
+                    '</div>');
+            }
+
+            $('#journal-entries').append(
+                '<div class="journal-entry-listing">' +
+                '<div class="view-more-journal-entries">View More</div>' +
+                '</div>');
+
+            $('.view-more-journal-entries').click(function () {
+                loadEntries(s3, bucket, continuationToken);
+            });
+
+        });
+    }
+
     this.init = function () {
         var urlParams = getUrlParams();
 
@@ -29,22 +68,7 @@ function Home() {
         );
         var s3 = new AWS.S3();
 
-        var listParams = {};
-        listParams.Bucket = urlParams.bucket;
-        s3.listObjectsV2(listParams, function(err, data) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-
-            console.log(data);
-
-            for(var i = 0; i < data.Contents.length; i++) {
-                $('#journal-entries').append('<div>' +
-                    data.Contents[i].Key +
-                '</div>');
-            }
-        });
+        loadEntries(s3, urlParams.bucket);
 
         $('#input').keypress(function() {
             $('#save').addClass('btn-danger');
@@ -64,6 +88,7 @@ function Home() {
                     $('#save').addClass('btn-success');
                     $('#save').removeClass('btn-danger');
                     console.log(JSON.stringify(response));
+                    loadEntries(s3, urlParams.bucket);
                 }
 
             });

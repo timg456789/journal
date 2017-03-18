@@ -60,6 +60,16 @@ h3 > .btn-success {
     font-size: .8em;
 }
 
+.journal-entry-listing {
+    cursor: pointer;
+    text-decoration: underline;
+    line-height: 2.5em;
+}
+
+.view-more-journal-entries {
+    text-align: center;
+}
+
 #input-form {
     width: 75%;
 }
