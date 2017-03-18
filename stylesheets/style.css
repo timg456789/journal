@@ -3,10 +3,6 @@ body {
     font-size: 1.2em;
 }
 
-.container {
-    min-width: 720px;
-}
-
 h1, h2, h3, .month-heading {
     font-family: "Trebuchet MS";
 }
