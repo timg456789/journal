@@ -7,7 +7,7 @@
     "test": "tape ./test-archive/*.js"
   },
   "dependencies": {
-    "aws-sdk": "2.7.19",
+    "aws-sdk": "2.28.0",
     "url-parameter": "git+https://github.com/timg456789/url-parameter.git"
   },
   "license": "Apache-2.0",

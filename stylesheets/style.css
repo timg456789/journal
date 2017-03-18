@@ -3,6 +3,10 @@ body {
     font-size: 1.2em;
 }
 
+.container {
+    min-width: 720px;
+}
+
 h1, h2, h3, .month-heading {
     font-family: "Trebuchet MS";
 }
@@ -56,6 +60,10 @@ h3 > .btn-success {
     font-size: .8em;
 }
 
+#input-form {
+    width: 75%;
+}
+
 #input-form > .form-label {
     clear: left;
 }
@@ -65,5 +73,5 @@ h3 > .btn-success {
 }
 
 #input {
-    width: 80%;
+    width: 100%;
 }
