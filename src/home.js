@@ -16,6 +16,21 @@ function Home() {
         return urlParams;
     }
 
+    function getEntryClick(s3, getParams) {
+        return function () {
+            console.log(getParams.Key);
+            s3.getObject(getParams, function (err, data) {
+                console.log(err);
+                console.log(data);
+                if (err) {
+                    $('#input').val(err);
+                } else {
+                    $('#input').val(data.Body);
+                }
+            });
+        };
+    }
+
     function loadEntries(s3, bucket, continuationToken) {
         $('#journal-entries').empty();
         var listParams = {};
@@ -37,15 +52,23 @@ function Home() {
 
             var objectIndex = 0;
             for(objectIndex; objectIndex < data.Contents.length; objectIndex++) {
-                $('#journal-entries').append(
-                    '<div class="journal-entry-listing">' +
+                var entryId = 'entry-key-' + data.Contents[objectIndex].Key;
+                var entry = $('<button id="' + entryId + '" ' +
+                    'class="btn btn-default journal-entry-listing">' +
                     data.Contents[objectIndex].Key +
-                    '</div>');
+                    '</button>');
+                $('#journal-entries').append(entry);
+
+                var getParams = {};
+                getParams.Bucket = bucket;
+                getParams.Key = data.Contents[objectIndex].Key;
+                console.log('adding click: ' + data.Contents[objectIndex].Key);
+                entry.click(getEntryClick(s3, getParams));
             }
 
             $('#journal-entries').append(
                 '<div class="journal-entry-listing">' +
-                '<div class="view-more-journal-entries">View More</div>' +
+                '<button class="btn btn-primary view-more-journal-entries">View More</button>' +
                 '</div>');
 
             $('.view-more-journal-entries').click(function () {
