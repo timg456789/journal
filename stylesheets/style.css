@@ -56,13 +56,9 @@ h3 > .btn-success {
     font-size: .8em;
 }
 
-#journal-entries {
-    cursor: pointer;
-    text-align: center;
-}
-
-#input-form {
-    width: 75%;
+.input-container {
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 #input-form > .form-label {
@@ -75,4 +71,9 @@ h3 > .btn-success {
 
 #input {
     width: 100%;
+}
+
+#journal-entries {
+    cursor: pointer;
+    text-align: center;
 }

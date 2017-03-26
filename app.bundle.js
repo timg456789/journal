@@ -118047,7 +118047,6 @@ function Home() {
                 var getParams = {};
                 getParams.Bucket = bucket;
                 getParams.Key = data.Contents[objectIndex].Key;
-                console.log('adding click: ' + data.Contents[objectIndex].Key);
                 entry.click(getEntryClick(s3, getParams));
             }
 
