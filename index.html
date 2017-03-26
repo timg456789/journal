@@ -12,11 +12,19 @@
       <script type="text/javascript" src="app.bundle.js"></script>
   </head>
   <body>
+
   <h1>Journal
+      <span id="search" class="search" data-toggle="popover">
+          <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+      </span>
       <span id="save" class="save">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       </span>
+      <span class="localDocCount">
+          Local Docs:<span id="documentsInLocalStorage"></span>
+      </span>
   </h1>
+
   <div id="header" class="container">
       <div id="output"></div>
   </div>

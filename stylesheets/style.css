@@ -1,6 +1,6 @@
 body {
-    font-family: Tahoma, Verdana, Arial, sans-serif;
-    font-size: 1.2em;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 1.3em;
 }
 
 h1, h2, h3, .month-heading {
@@ -45,6 +45,18 @@ h3 > .btn-success {
     margin-bottom: 0px;
 }
 
+.localDocCount {
+    font-size: .5em;
+}
+
+.search {
+    font-size: .8em;
+}
+
+#search-input, #search-results {
+    color: black;
+}
+
 .save {
     display: inline-block;
     float: right;
@@ -71,6 +83,7 @@ h3 > .btn-success {
 
 #input {
     width: 100%;
+    line-height: 1.5em;
 }
 
 #journal-entries {
