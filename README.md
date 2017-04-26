@@ -16,10 +16,11 @@ Use a web worker for auto save
 ## Running Tests
 
 Create a file called personal.json in the root of the solution, which has been gitignored, like below:
+```
 {
     "endpoint": "search-[DOMAIN].us-east-1.es.amazonaws.com"
 }
-
+```
 ## Getting Started
 
 ### S3
@@ -31,7 +32,7 @@ Create a file called personal.json in the root of the solution, which has been g
 3. Add a bucket policy to the primary bucket, granting permission to the new IAM user.
 
 4. Enable CORS for GET and PUT
-
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
 <CORSRule>
@@ -42,7 +43,7 @@ Create a file called personal.json in the root of the solution, which has been g
     <AllowedHeader>*</AllowedHeader>
 </CORSRule>
 </CORSConfiguration>
-
+```
 ### Elastic Search
 
 1. Create an elastic search domain.
@@ -51,7 +52,7 @@ Create a file called personal.json in the root of the solution, which has been g
     a. Adding permissions through the canned template didn't work after much troubleshooting and the policies take about 15 minutes to change and debug any chages to the template. It's suggested to assign permissions directly through IAM for this reason.
 
 3. Grant a trusted IP address access to the elastic search domain. This grants master access for manipulating documents.
-
+```
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -71,43 +72,48 @@ Create a file called personal.json in the root of the solution, which has been g
     }
   ]
 }
-
+```
 4. Create a lambda function.
     a. Trigger the lambda function on the event type `Object Created (All)` for the primary S3 bucket.
     b. Download, configure, then upload the sample project for elastic search from github.
 
 #### Create Index
 
-URL: .es.amazonaws.com/journal
+URL: `.es.amazonaws.com/journal`
 
-Method: POST
+Method: `POST`
 
-Body:
+Body
+```
 {
     "settings" : {
         "number_of_shards" : 5,
         "number_of_replicas" : 1
     }
 }
-
-Response:
-
+```
+Response
+```
 {
   "acknowledged": true,
   "shards_acknowledged": true
 }
-
+```
 #### Create or Update Document
 
-Method: POST
+Method: `POST`
 
-URL: .es.amazonaws.com/journal/2017-01-05/
+URL: `.es.amazonaws.com/journal/2017-01-05/`
 
-Body: {
+Body
+```
+{
     "testing": "testing-123456789"
 }
-
-Response When New: {
+```
+Response When New
+```
+{
   "_index": "journal",
   "_type": "2017-01-02",
   "_id": "1",
@@ -120,27 +126,25 @@ Response When New: {
   },
   "created": true
 }
-
+```
 #### Search
 
-URL: .es.amazonaws.com/journal/_search
+Method: `POST`
 
-    - Add the document type if desired for a sub-index of sorts
-    
-    - .es.amazonaws.com/journal/2017-01-06/_search
-    
-Method: POST
+Url: `.es.amazonaws.com/journal/_search`
 
-Url: .es.amazonaws.com/journal/_search
-
-Body: {
-	"query" :
-	{
-		"match": { "testing": "testing-2" }
-	}
+Body
+```
+{
+    "query" :
+    {
+	        "match": { "testing": "testing-2" }
+    }
 }
-
-Response: {
+```
+Response
+```
+{
   "took": 1,
   "timed_out": false,
   "_shards": {
@@ -173,14 +177,11 @@ Response: {
     ]
   }
 }
-
+```
 ## Autosave
 At some point I need an auto save routine. At least to local storage.
 
 ## Deletions
 Deletions need to be done manually within the AWS console.
 
-http://docs.aws.amazon.com/AmazonS3/latest/dev/DeletingObjectsfromVersioningSuspendedBuckets.html
-
-## Conversion
-There is a conversion commit on 2017-04-04. Any documents before that commit don't have an accurate timestamp. The correct timestamp is in the object key.
+`http://docs.aws.amazon.com/AmazonS3/latest/dev/DeletingObjectsfromVersioningSuspendedBuckets.html`
