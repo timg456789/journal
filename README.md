@@ -10,9 +10,13 @@ HTML5 for basic functionality
 ### Save Legend
 
 Red = connected
+
 Green = no connection
+
 Orange = unsaved changes
+
 Light Blue = saved locally
+
 Dark Blue = saved remotely
 
 ### Save with No Connection
