@@ -29,8 +29,7 @@ function HomeSave(endpoint, s3, bucket) {
         localStorage.setItem(doc.time, docJson);
 
         that.updateLocalCount();
-        saveElement.addClass('btn-warning');
-        saveElement.removeClass('btn-danger');
+        that.setConnectivitySavedToLocal();
     }
 
     function showEntryInInput(s3, getParams) {
@@ -49,9 +48,8 @@ function HomeSave(endpoint, s3, bucket) {
     function saveToRemote(doc) {
         var context = {};
         context.succeed = function () {
-            saveElement.addClass('btn-success');
-            saveElement.removeClass('btn-warning');
-
+            console.log('setting saved to remote');
+            that.setConnectivitySavedToRemote();
             removeFromLocal(doc.time);
         };
         context.fail = function (failSaveSearch) {
@@ -61,6 +59,31 @@ function HomeSave(endpoint, s3, bucket) {
         var documentSave = new DocumentSave(esOptions, s3, bucket, context);
         documentSave.save(doc);
     }
+
+    this.setConnectivityAvailable = function (available) {
+        var className = available ? 'btn-success' : 'btn-danger';
+        this.setConnectivity(className);
+    };
+
+    this.setConnectivitySavedToRemote = function () {
+        this.setConnectivity('btn-primary');
+    };
+
+    this.setConnectivitySavedToLocal = function () {
+        this.setConnectivity('btn-info');
+    };
+
+    this.setConnectivityUnsavedChanges = function () {
+        this.setConnectivity('btn-warning');
+    };
+
+    this.setConnectivity = function (newClass) {
+        saveElement.removeClass('btn-warning');
+        saveElement.removeClass('btn-success');
+        saveElement.removeClass('btn-danger');
+        saveElement.removeClass('btn-info');
+        saveElement.addClass(newClass);
+    };
 
     this.loadEntries = function (continuationToken) { // This could really move out of here into its own class and component.
         $('#journal-entries').empty();
@@ -79,7 +102,7 @@ function HomeSave(endpoint, s3, bucket) {
             continuationToken = data.NextContinuationToken;
 
             var objectIndex;
-            var getParams ;
+            var getParams;
             var entryId;
             var entry;
 

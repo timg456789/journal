@@ -7,6 +7,30 @@ HTML5 for basic functionality
 
 ## Save Routine
 
+### Save Legend
+
+Red = connected
+Green = no connection
+Orange = unsaved changes
+Light Blue = saved locally
+Dark Blue = saved remotely
+
+### Save with No Connection
+
+Red -> Orange -> Light Blue
+
+### Save with Connection
+
+Green -> Orange -> Light Blue -> Dark Blue
+
+### No Connection with Existing Documents on Load
+
+Red
+
+### Connection with Existing Documents on Load
+
+Green -> Dark Blue
+
 ![Save Flow](https://timg456789.github.io/journal/docs/save-flow.jpg)
 
 Documents are first saved to local storage then deployed to s3. If s3 can't be reached, then the documents will be deployed later. When the documents are later deployed, the text will be deployed using whatever the current configuration is with the time from the original save.

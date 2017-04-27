@@ -7,6 +7,7 @@ function Home() {
     'use strict';
 
     var s3;
+    var homeSave;
     var saveButton = $('#save');
 
     function getUrlParam(param) {
@@ -25,11 +26,6 @@ function Home() {
         return urlParams;
     }
 
-    function indicateUnsavedChanges() {
-        saveButton.addClass('btn-danger');
-        saveButton.removeClass('btn-success');
-    }
-
     this.init = function () {
         var urlParams = getUrlParams();
 
@@ -39,20 +35,20 @@ function Home() {
             region: 'us-east-1'
         });
 
-        var homeSave = new HomeSave(urlParams.endpoint, s3, urlParams.bucket);
+        homeSave = new HomeSave(urlParams.endpoint, s3, urlParams.bucket);
 
         var searchDialog = new SearchDialog();
         searchDialog.init(urlParams.endpoint, urlParams.index);
 
         homeSave.updateLocalCount();
-
+        homeSave.setConnectivityAvailable(navigator.onLine);
         if (navigator.onLine) {
             homeSave.saveAllToRemote();
             homeSave.loadEntries();
         }
 
         $('#input').keypress(function() {
-            indicateUnsavedChanges();
+            homeSave.setConnectivityUnsavedChanges();
         });
 
         saveButton.click(function () {
