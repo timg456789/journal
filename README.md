@@ -7,6 +7,8 @@ HTML5 for basic functionality
 
 ## Save Routine
 
+Documents are first saved to local storage then deployed to s3. If s3 can't be reached, then the documents will be deployed later. When the documents are later deployed, the text will be deployed using whatever the current configuration is with the time from the original save.
+
 ### Save Legend
 
 Red = connected
@@ -36,10 +38,6 @@ Red
 Green -> Dark Blue
 
 ![Save Flow](https://timg456789.github.io/journal/docs/save-flow.jpg)
-
-Documents are first saved to local storage then deployed to s3. If s3 can't be reached, then the documents will be deployed later. When the documents are later deployed, the text will be deployed using whatever the current configuration is with the time from the original save.
-
-Use a web worker for auto save
 
 ## Running Tests
 
