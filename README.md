@@ -1,8 +1,11 @@
 # Journal
 
 ## Supported Browsers (Latest Version)
+
 Safari
+
 Chrome
+
 HTML5 for basic functionality
 
 ## Save Routine
