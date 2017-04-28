@@ -70,6 +70,7 @@ var createCb = {
         listParams.Bucket = personal.bucket;
         listParams.MaxKeys = 1000;
 
+        console.log('listing');
         s3.listObjectsV2(listParams, listObjectsCb);
     }
 };

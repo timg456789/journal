@@ -2,6 +2,7 @@ var AWS = require('aws-sdk');
 var UrlParameter = require('url-parameter/src/url-parameter');
 var SearchDialog = require('./search-dialog');
 var HomeSave = require('./home-save');
+var SaveIndicator = require('./save-indicator');
 
 function Home() {
     'use strict';
@@ -35,20 +36,31 @@ function Home() {
             region: 'us-east-1'
         });
 
-        homeSave = new HomeSave(urlParams.endpoint, s3, urlParams.bucket);
+        var esOptions = {
+            protocol: 'https',
+            endpoint: urlParams.endpoint,
+            index: 'journal',
+            docType: 'entry',
+            region: 'us-east-1'
+        };
+
+        homeSave = new HomeSave(s3, urlParams.bucket, esOptions);
 
         var searchDialog = new SearchDialog();
-        searchDialog.init(urlParams.endpoint, urlParams.index);
+        searchDialog.init(urlParams.endpoint, urlParams.index, esOptions.docType);
 
         homeSave.updateLocalCount();
-        homeSave.setConnectivityAvailable(navigator.onLine);
+
+        var saveIndicator = new SaveIndicator();
+        saveIndicator.setConnectivityAvailable(navigator.onLine);
         if (navigator.onLine) {
             homeSave.saveAllToRemote();
             homeSave.loadEntries();
         }
 
         $('#input').keypress(function() {
-            homeSave.setConnectivityUnsavedChanges();
+            saveIndicator.setConnectivityUnsavedChanges();
+            homeSave.saveInputToLocal();
         });
 
         saveButton.click(function () {

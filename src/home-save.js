@@ -1,35 +1,20 @@
 var DocumentSave = require('./document-save');
 var DocumentFactory = require('./document-factory');
+var docFactory = new DocumentFactory();
+var SaveIndicator = require('./save-indicator');
 
-function HomeSave(endpoint, s3, bucket) {
+function HomeSave(s3, bucket, esOptions) {
     'use strict';
 
     var that = this;
-    var saveElement = $('#save');
-
-    var esOptions;
-    esOptions = {
-        protocol: 'https',
-        endpoint: endpoint,
-        index: 'journal',
-        docType: 'entry',
-        region: 'us-east-1'
-    };
+    var doc = docFactory.create('');
+    var saveIndicator = new SaveIndicator();
 
     function removeFromLocal(itemKey) {
         console.log('removing locally: ' + itemKey);
         localStorage.removeItem(itemKey);
 
         that.updateLocalCount();
-    }
-
-    function saveToLocal(doc) {
-        var docJson = JSON.stringify(doc);
-        console.log('saving locally: ' + docJson);
-        localStorage.setItem(doc.time, docJson);
-
-        that.updateLocalCount();
-        that.setConnectivitySavedToLocal();
     }
 
     function showEntryInInput(s3, getParams) {
@@ -49,7 +34,7 @@ function HomeSave(endpoint, s3, bucket) {
         var context = {};
         context.succeed = function () {
             console.log('setting saved to remote');
-            that.setConnectivitySavedToRemote();
+            saveIndicator.setConnectivitySavedToRemote();
             removeFromLocal(doc.time);
         };
         context.fail = function (failSaveSearch) {
@@ -60,29 +45,16 @@ function HomeSave(endpoint, s3, bucket) {
         documentSave.save(doc);
     }
 
-    this.setConnectivityAvailable = function (available) {
-        var className = available ? 'btn-success' : 'btn-danger';
-        this.setConnectivity(className);
-    };
+    this.saveInputToLocal = function () {
+        var docText = $('#input').val().trim();
+        doc.content = docText;
+        console.log('saving locally: ' + docText);
 
-    this.setConnectivitySavedToRemote = function () {
-        this.setConnectivity('btn-primary');
-    };
+        var docJson = JSON.stringify(doc);
+        localStorage.setItem(doc.time, docJson);
 
-    this.setConnectivitySavedToLocal = function () {
-        this.setConnectivity('btn-info');
-    };
-
-    this.setConnectivityUnsavedChanges = function () {
-        this.setConnectivity('btn-warning');
-    };
-
-    this.setConnectivity = function (newClass) {
-        saveElement.removeClass('btn-warning');
-        saveElement.removeClass('btn-success');
-        saveElement.removeClass('btn-danger');
-        saveElement.removeClass('btn-info');
-        saveElement.addClass(newClass);
+        that.updateLocalCount();
+        saveIndicator.setConnectivitySavedToLocal();
     };
 
     this.loadEntries = function (continuationToken) { // This could really move out of here into its own class and component.
@@ -135,14 +107,14 @@ function HomeSave(endpoint, s3, bucket) {
     this.saveAllToRemote = function () {
         var itemKey;
         var i;
-        var doc;
+        var currentDoc;
         var localKeys = Object.keys(localStorage);
 
         for (i = 0; i < localKeys.length; i += 1) {
             itemKey = localKeys[i];
 
-            doc = JSON.parse(localStorage[itemKey]);
-            saveToRemote(doc);
+            currentDoc = JSON.parse(localStorage[itemKey]);
+            saveToRemote(currentDoc);
         }
     };
 
@@ -152,12 +124,7 @@ function HomeSave(endpoint, s3, bucket) {
     };
 
     this.save = function () {
-        var docText = $('#input').val().trim();
-        var docFactory = new DocumentFactory();
-        var doc = docFactory.create(docText);
-
-        saveToLocal(doc);
-
+        that.saveInputToLocal();
         if (navigator.onLine) {
             that.saveAllToRemote();
         }
