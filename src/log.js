@@ -1,9 +1,20 @@
+var UrlParameter = require('url-parameter/src/url-parameter');
+
 function Log() {
-    // It doesn't matter what gets logged or how it gets logged,
-    // it gets routed through here and is non-blocking.
+
+    function getUrlParam(param) {
+        var urlParameter = new UrlParameter();
+        var url = window.location.href;
+        return urlParameter.getParameterByName(url, param);
+    }
+
     this.add = function (msg) {
         console.log(msg);
-        //$('#debug-console').append(msg);
+
+        var debugMode = getUrlParam('debugMode') == 'true';
+        if (debugMode) {
+            $('#debug-console').append(msg);
+        }
     };
 
 }
