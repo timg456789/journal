@@ -44,25 +44,6 @@ function Home() {
             region: 'us-east-1'
         };
 
-        var options = {};
-        options.Bucket = urlParams.bucket;
-        options.Key = 'new test doc';
-        options.Body = '{test:"test"}';
-
-        s3.upload(options, function (err, data) {
-            if (err) {
-                console.log('failure saving: ' + JSON.stringify(err, 0, 4));
-            } else {
-                console.log('saved: ' + JSON.stringify(data, 0, 4));
-            }
-        });
-
-
-
-
-
-        /*
-
         homeSave = new HomeSave(s3, urlParams.bucket, esOptions);
 
         var searchDialog = new SearchDialog();
@@ -85,7 +66,7 @@ function Home() {
         saveButton.click(function () {
             homeSave.save();
         });
-*/
+
     };
 
 }
