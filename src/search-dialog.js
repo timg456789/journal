@@ -1,4 +1,5 @@
 var SearchEngine = require('./search');
+var Log = require('./Log');
 
 function SearchDialog() {
     'use strict';
@@ -52,7 +53,8 @@ function SearchDialog() {
                     }
                 };
                 context.fail = function (result) {
-                    console.log('search error: ' + JSON.stringify(result));
+                    var log = new Log();
+                    log.add('search error: ' + JSON.stringify(result));
                 };
                 searchEngine.search(esOptions, context);
             });

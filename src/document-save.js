@@ -1,4 +1,5 @@
 var Search = require('./search');
+var Log = require('./Log');
 
 function DocumentSave(esOptions, s3, bucket, context) {
     'use strict';
@@ -13,7 +14,9 @@ function DocumentSave(esOptions, s3, bucket, context) {
 
         s3.upload(options, function (err) {
             if (err) {
-                console.log('failure saving: ' + JSON.stringify(err, 0, 4));
+                var msg = 'failure saving: ' + JSON.stringify(err, 0, 4);
+                var log = new Log();
+                log.add(msg);
             } else {
                 var search = new Search();
                 search.upload(esOptions, doc, context);

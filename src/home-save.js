@@ -2,6 +2,7 @@ var DocumentSave = require('./document-save');
 var DocumentFactory = require('./document-factory');
 var docFactory = new DocumentFactory();
 var SaveIndicator = require('./save-indicator');
+var Log = require('./log');
 
 function HomeSave(s3, bucket, esOptions) {
     'use strict';
@@ -9,9 +10,10 @@ function HomeSave(s3, bucket, esOptions) {
     var that = this;
     var doc = docFactory.create('');
     var saveIndicator = new SaveIndicator();
+    var log = new Log();
 
     function removeFromLocal(itemKey) {
-        console.log('removing locally: ' + itemKey);
+        log.add('removing locally: ' + itemKey);
         localStorage.removeItem(itemKey);
 
         that.updateLocalCount();
@@ -33,12 +35,12 @@ function HomeSave(s3, bucket, esOptions) {
     function saveToRemote(doc) {
         var context = {};
         context.succeed = function () {
-            console.log('setting saved to remote');
+            log.add('setting saved to remote');
             saveIndicator.setConnectivitySavedToRemote();
             removeFromLocal(doc.time);
         };
         context.fail = function (failSaveSearch) {
-            console.log('failure saving: ' + JSON.stringify(failSaveSearch, 0, 4));
+            log.add('failure saving: ' + JSON.stringify(failSaveSearch, 0, 4));
         };
 
         var documentSave = new DocumentSave(esOptions, s3, bucket, context);
@@ -48,7 +50,7 @@ function HomeSave(s3, bucket, esOptions) {
     this.saveInputToLocal = function () {
         var docText = $('#input').val().trim();
         doc.content = docText;
-        console.log('saving locally: ' + docText);
+        log.add('saving locally: ' + docText);
 
         var docJson = JSON.stringify(doc);
         localStorage.setItem(doc.time, docJson);
@@ -67,7 +69,7 @@ function HomeSave(s3, bucket, esOptions) {
         }
         s3.listObjectsV2(listParams, function(err, data) {
             if (err) {
-                console.log('error listing objects: ' + JSON.stringify(err));
+                log.add('error listing objects: ' + JSON.stringify(err));
                 return;
             }
 
