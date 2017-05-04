@@ -1,4 +1,4 @@
-var SearchEngine = require('./search');
+var Search = require('./search');
 
 function DocumentSave(esOptions, s3, bucket, context) {
     'use strict';
@@ -15,8 +15,8 @@ function DocumentSave(esOptions, s3, bucket, context) {
             if (err) {
                 console.log('failure saving: ' + JSON.stringify(err, 0, 4));
             } else {
-                var searchEngine = new SearchEngine();
-                searchEngine.upload(esOptions, doc, context);
+                var search = new Search();
+                search.upload(esOptions, doc, context);
             }
         });
     };
