@@ -3,7 +3,7 @@ function Log() {
     // it gets routed through here and is non-blocking.
     this.add = function (msg) {
         console.log(msg);
-        $('#debug-console').append(msg);
+        //$('#debug-console').append(msg);
     };
 
 }
