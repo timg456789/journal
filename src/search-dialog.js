@@ -11,7 +11,7 @@ function SearchDialog() {
         $('#search-results').append(result);
     }
 
-    this.init = function(endpoint, index, docType) {
+    this.init = function (endpoint, index, docType) {
         $(function () {
             $('[data-toggle="popover"]').popover();
         });
@@ -25,10 +25,11 @@ function SearchDialog() {
         };
 
         $('#search').popover(searchPopOverOptions);
-        $('#search').click(function() {
+        $('#search').click(function () {
             $('#search').popover('show');
+            $('#search-input').focus();
 
-            $('#search-input').keyup(function() {
+            $('#search-input').keyup(function () {
                 var searchText = $('#search-input').val();
 
                 var searchEngine = new SearchEngine();

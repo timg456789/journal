@@ -49,8 +49,10 @@ h3 > .btn-success {
     font-size: .5em;
 }
 
-.search {
+.search,
+.refresh-search {
     font-size: .8em;
+    cursor: pointer;
 }
 
 #search-input, #search-results {
