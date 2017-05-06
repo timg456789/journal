@@ -9,6 +9,7 @@ function DocumentSave(esOptions, s3, bucket, context) {
         options.Bucket = bucket;
         options.Key = doc.time;
         options.Body = JSON.stringify(doc);
+        options.ServerSideEncryption = 'AES256';
 
         esOptions.docTitle = doc.time;
 

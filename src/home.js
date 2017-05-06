@@ -30,6 +30,8 @@ function Home() {
     this.init = function () {
         var urlParams = getUrlParams();
 
+        AWS.config.update({signatureVersion : 'v4'});
+
         s3 = new AWS.S3({
             accessKeyId: urlParams.accessKeyId,
             secretAccessKey: urlParams.secretAccessKey,
