@@ -1,4 +1,4 @@
-var UrlParameter = require('url-parameter/src/url-parameter');
+var UrlParameter = require('journal-library/src/url-parameter');
 
 function Log() {
 

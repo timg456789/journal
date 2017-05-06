@@ -1,5 +1,5 @@
 var AWS = require('aws-sdk');
-var UrlParameter = require('url-parameter/src/url-parameter');
+var UrlParameter = require('journal-library/src/url-parameter');
 var SearchDialog = require('./search-dialog');
 var HomeSave = require('./home-save');
 var SaveIndicator = require('./save-indicator');

@@ -89,4 +89,13 @@ h3 > .btn-success {
 #journal-entries {
     cursor: pointer;
     text-align: center;
+    font-family: arial;
+}
+
+.journal-entry-listing {
+    font-size: .9em;
+}
+
+.journal-entry-listing > button {
+    margin-left: 12px;
 }

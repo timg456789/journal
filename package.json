@@ -10,7 +10,7 @@
   "dependencies": {
     "aws-sdk": "2.46.0",
     "request": "2.81.0",
-    "url-parameter": "git+https://github.com/timg456789/url-parameter.git"
+    "journal-library": "git+https://github.com/timg456789/journal-library.git"
   },
   "license": "Apache-2.0",
   "author": "Timothy Scott Gonzalez"

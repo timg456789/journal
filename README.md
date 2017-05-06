@@ -1,7 +1,17 @@
 # Journal
 
+## Integrity
+
+This isn't too far away with the ability to drill through a bucket now to get all objects. I want to put these into elasticsearch. Then monintor and if they ever go bad, then look into backing up.
+
+Document -> Signature
+Document -> Signature -> Hash of Signatures
+
 ## Encryption
+Need to look a lot more into this and see what's supported with cross-region replication.
+
 http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+
 Server-side encryption is about protecting data at rest. Using server-side encryption with customer-provided encryption keys (SSE-C) allows you to set your own encryption keys. With the encryption key you provide as part of your request, Amazon S3 manages both the encryption, as it writes to disks, and decryption, when you access your objects. Therefore, you don't need to maintain any code to perform data encryption and decryption. The only thing you do is manage the encryption keys you provide.
 
 ## Supported Browsers (Latest Version)
