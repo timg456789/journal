@@ -67,18 +67,22 @@ Create a file called personal.json in the root of the solution, which has been g
 
 3. Add a bucket policy to the primary bucket, granting permission to the new IAM user.
 
-4. Enable CORS for GET and PUT
+4. CORS with custom HTTP Headers e.g. md5Hash
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
 <CORSRule>
     <AllowedOrigin>*</AllowedOrigin>
     <AllowedMethod>GET</AllowedMethod>
+    <AllowedMethod>DELETE</AllowedMethod>
     <AllowedMethod>PUT</AllowedMethod>
+    <AllowedMethod>HEAD</AllowedMethod>
     <MaxAgeSeconds>3000</MaxAgeSeconds>
     <AllowedHeader>*</AllowedHeader>
+    <AllowedHeader>x-amz-meta-metainfo</AllowedHeader>
 </CORSRule>
 </CORSConfiguration>
+
 ```
 ### Elastic Search
 
