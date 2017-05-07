@@ -30,12 +30,13 @@ function Home() {
     this.init = function () {
         var urlParams = getUrlParams();
 
-        AWS.config.update({signatureVersion : 'v4'});
+        AWS.config.update({signatureVersion: 'v4'});
 
         s3 = new AWS.S3({
             accessKeyId: urlParams.accessKeyId,
             secretAccessKey: urlParams.secretAccessKey,
-            region: 'us-east-1'
+            region: 'us-east-1',
+            computeChecksums: true
         });
 
         var esOptions = {

@@ -13,7 +13,7 @@ function DocumentSave(esOptions, s3, bucket, context) {
 
         esOptions.docTitle = doc.time;
 
-        s3.upload(options, function (err) {
+        s3.upload(options, function (err, data) {
             if (err) {
                 var msg = 'failure saving: ' + JSON.stringify(err, 0, 4);
                 var log = new Log();
