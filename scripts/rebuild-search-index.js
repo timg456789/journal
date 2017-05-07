@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 const Search = require('../src/search');
 const search = new Search();
-const DocumentFactory = require('../src/document-factory');
+const DocumentFactory = require('/journal-library/src/document-factory');
 const documentFactory = new DocumentFactory();
 const personal = require('../personal.json');
 

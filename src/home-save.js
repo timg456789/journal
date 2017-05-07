@@ -1,9 +1,9 @@
 var DocumentSave = require('./document-save');
 var DocumentDelete = require('./document-delete');
-var DocumentFactory = require('./document-factory');
 var docFactory = new DocumentFactory();
 var SaveIndicator = require('./save-indicator');
 var Log = require('./log');
+var DocumentFactory = require('journal-library/src/document-factory');
 const UUID = require('journal-library/src/UUID');
 var uuid = new UUID();
 
