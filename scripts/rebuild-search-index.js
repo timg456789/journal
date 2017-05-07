@@ -1,8 +1,6 @@
 const AWS = require('aws-sdk');
-const Search = require('../src/search');
-const search = new Search();
-const DocumentFactory = require('/journal-library/src/document-factory');
-const documentFactory = new DocumentFactory();
+const Search = require('../../journal/src/search');
+const search = new Search()
 const personal = require('../personal.json');
 
 AWS.config.update(
@@ -24,7 +22,7 @@ var esOptions = {
 
 var uploadCb = {
     fail: function (failResult) {
-        console.log('failed to upload document: ' + JSON.stringify(failResult))
+        console.log('failed to upload document: ' + JSON.stringify(failResult));
     },
     succeed: function (result) {
         console.log('created document for search');
@@ -45,7 +43,10 @@ function getS3Cb(getParams) {
                     region: 'us-east-1',
                     docTitle: getParams.Key
                 };
-                search.upload(uploadOptions, JSON.parse(data.Body), uploadCb);
+
+                var parsedDocument = JSON.parse(data.Body);
+                search.upload(uploadOptions, parsedDocument, uploadCb);
+
             }
         });
     };

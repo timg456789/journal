@@ -1,4 +1,4 @@
-var UrlParameter = require('journal-library/src/url-parameter');
+var UrlParameter = require('./library/url-parameter');
 
 function Log() {
     'use strict';
@@ -16,8 +16,6 @@ function Log() {
             && getUrlParam('debugMode') == 'true') {
             $('#debug-console').append(msg);
         }
-        console.log('done');
-
     };
 
 }

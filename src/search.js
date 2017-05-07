@@ -9,8 +9,8 @@ function Search() {
 
     function getPath(esOptions) {
         var mappedPath = esOptions.protocol + '://' +
-            esOptions.endpoint + '/' +
-            esOptions.index;
+                esOptions.endpoint + '/' +
+                esOptions.index;
 
         if (esOptions.docType) {
             mappedPath += '/' + esOptions.docType;
@@ -23,7 +23,7 @@ function Search() {
         return mappedPath;
     }
 
-    this.create = function(esOptions, document, context) {
+    this.create = function (esOptions, document, context) {
         var mappedPath = getPath(esOptions);
 
         request(
@@ -38,15 +38,15 @@ function Search() {
                     context.succeed(body);
                 } else {
                     var failMsg = JSON.stringify(error, 0, 4) +
-                        JSON.stringify(response, 0, 4) +
-                        JSON.stringify(body, 0, 4);
+                            JSON.stringify(response, 0, 4) +
+                            JSON.stringify(body, 0, 4);
                     context.fail(failMsg);
                 }
             }
         );
     };
 
-    this.delete = function(esOptions, context) {
+    this.delete = function (esOptions, context) {
         var mappedPath = getPath(esOptions);
 
         request(
@@ -59,8 +59,8 @@ function Search() {
                     context.succeed(body);
                 } else {
                     var failMsg = JSON.stringify(error, 0, 4) +
-                        JSON.stringify(response, 0, 4) +
-                        JSON.stringify(body, 0, 4);
+                            JSON.stringify(response, 0, 4) +
+                            JSON.stringify(body, 0, 4);
                     context.fail(failMsg);
                 }
             }
@@ -83,8 +83,8 @@ function Search() {
                     context.succeed(body);
                 } else {
                     var failMsg = JSON.stringify(error, 0, 4) +
-                        JSON.stringify(response, 0, 4) +
-                        JSON.stringify(body, 0, 4);
+                            JSON.stringify(response, 0, 4) +
+                            JSON.stringify(body, 0, 4);
                     context.fail(failMsg);
                 }
             }
@@ -112,8 +112,8 @@ function Search() {
                     context.succeed(body);
                 } else {
                     var failMsg = JSON.stringify(error, 0, 4) +
-                                    JSON.stringify(response, 0, 4) +
-                                    JSON.stringify(body, 0, 4);
+                                        JSON.stringify(response, 0, 4) +
+                                        JSON.stringify(body, 0, 4);
                     context.fail(failMsg);
                 }
             }

@@ -1,4 +1,5 @@
 .idea/
+backup/
 node_modules/
 personal.json
 debug.log

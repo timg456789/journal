@@ -13,7 +13,9 @@ function SaveIndicator() {
     }
 
     this.setConnectivityAvailable = function (onLine) {
-        setConnectivity(onLine ? 'btn-success' : 'btn-danger');
+        setConnectivity(onLine
+            ? 'btn-success'
+            : 'btn-danger');
     };
 
     this.setConnectivityUnsavedChanges = function () {

@@ -1,5 +1,7 @@
 # Journal
 
+I want to make it so that encryption is required. I'm not sure how that will work with existing documents.
+
 ## Document
 
     {
@@ -234,3 +236,30 @@ At some point I need an auto save routine. At least to local storage.
 Deletions need to be done manually within the AWS console.
 
 `http://docs.aws.amazon.com/AmazonS3/latest/dev/DeletingObjectsfromVersioningSuspendedBuckets.html`
+
+# Journal Support
+
+## Setup Create a personal.json file for test and script dependencies.
+
+{
+    "endpoint": ".us-east-1.es.amazonaws.com",
+    "accessKeyId": "",
+    "secretAccessKey": "",
+    "bucket": "",
+    "docType": ""
+}
+
+## npm test
+
+1. Run tests
+2. Save output to journal-support/test-output.txt
+
+## npm run rebuild-search-index
+3. Recreate the elastic search index and send s3 objects to it.
+
+Directory structure is below. A non-standard UTC date format is used with time intervals from greatest to least for natural order.
+
+    journal-support/backup/backu-data-2017-5-6-8-15-26-79-Z
+        backup-document-2017-3-17-1-22-44-836-Z
+        backup-document-2017-3-17-1-22-44-836-Z
+        backup-document-2017-3-17-1-22-44-836-Z
