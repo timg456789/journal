@@ -49,14 +49,6 @@ Green -> Dark Blue
 
 ![Save Flow](https://timg456789.github.io/journal/docs/save-flow.jpg)
 
-## Running Tests
-
-Create a file called personal.json in the root of the solution, which has been gitignored, like below:
-```
-{
-    "endpoint": "search-[DOMAIN].us-east-1.es.amazonaws.com"
-}
-```
 ## Getting Started
 
 ### S3
@@ -119,7 +111,7 @@ Create a file called personal.json in the root of the solution, which has been g
 
 #### Create Index
 
-URL: `.es.amazonaws.com/journal`
+URL: 'search-[DOMAIN].us-east-1.es.amazonaws.com/journal'
 
 Method: `POST`
 
@@ -143,7 +135,7 @@ Response
 
 Method: `POST`
 
-URL: `.es.amazonaws.com/journal/2017-01-05/`
+URL: 'search-[DOMAIN].us-east-1.es.amazonaws.com/journal/entry/`
 
 Body
 ```
@@ -171,7 +163,7 @@ Response When New
 
 Method: `POST`
 
-Url: `.es.amazonaws.com/journal/_search`
+Url: 'search-[DOMAIN].us-east-1.es.amazonaws.com/journal/_search`
 
 Body
 ```
@@ -218,20 +210,13 @@ Response
   }
 }
 ```
-## Autosave
-At some point I need an auto save routine. At least to local storage.
-
-## Deletions
-Deletions need to be done manually within the AWS console.
-
-`http://docs.aws.amazon.com/AmazonS3/latest/dev/DeletingObjectsfromVersioningSuspendedBuckets.html`
 
 # Journal Support
 
 ## Setup Create a personal.json file for test and script dependencies.
 
 {
-    "endpoint": ".us-east-1.es.amazonaws.com",
+    "endpoint": "search-[DOMAIN].us-east-1.es.amazonaws.com/journal",
     "accessKeyId": "",
     "secretAccessKey": "",
     "bucket": "",
@@ -240,12 +225,13 @@ Deletions need to be done manually within the AWS console.
 
 ## npm test
 
-1. Run tests
+1. Run JS in /tests
 2. Save output to journal-support/test-output.txt
 
 ## npm run rebuild-search-index
-3. Recreate the elastic search index and send s3 objects to it.
+Destroy and rebuild elastic search index from s3 objects.
 
+## npm run backup
 Directory structure is below. A non-standard UTC date format is used with time intervals from greatest to least for natural order.
 
     journal-support/backup/backu-data-2017-5-6-8-15-26-79-Z

@@ -9,7 +9,8 @@
   "scripts": {
     "build": "browserify src/app.js -o app.bundle.js",
     "test": "tape ./tests/*.js",
-    "rebuild-search-index": "node ./scripts/rebuild-search-index"
+    "rebuild-search-index": "node ./scripts/rebuild-search-index",
+    "backup": "node ./scripts/backup"
   },
   "dependencies": {
     "aws-sdk": "2.46.0",
