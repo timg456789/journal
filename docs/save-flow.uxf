@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2">
-  <zoom_level>10</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>10</x>
-      <y>140</y>
-      <w>180</w>
-      <h>50</h>
+      <x>27</x>
+      <y>117</y>
+      <w>162</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>browser
 --
@@ -17,10 +17,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>140</y>
-      <w>180</w>
-      <h>30</h>
+      <x>342</x>
+      <y>117</y>
+      <w>162</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>aws bucket</panel_attributes>
     <additional_attributes/>
@@ -28,10 +28,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>220</y>
-      <w>170</w>
-      <h>30</h>
+      <x>342</x>
+      <y>189</y>
+      <w>153</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>aws replicated bucket</panel_attributes>
     <additional_attributes/>
@@ -39,10 +39,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>350</x>
-      <y>160</y>
-      <w>330</w>
-      <h>80</h>
+      <x>333</x>
+      <y>135</y>
+      <w>297</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;
 Cross-Region Replication, Versioned and Logged</panel_attributes>
@@ -51,10 +51,10 @@ Cross-Region Replication, Versioned and Logged</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>10</x>
-      <y>240</y>
-      <w>180</w>
-      <h>70</h>
+      <x>27</x>
+      <y>207</y>
+      <w>162</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>local storage
 --
@@ -64,10 +64,10 @@ Cross-Region Replication, Versioned and Logged</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>0</x>
-      <y>180</y>
-      <w>60</w>
-      <h>80</h>
+      <x>18</x>
+      <y>153</y>
+      <w>54</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 Save</panel_attributes>
@@ -77,9 +77,9 @@ Save</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>180</x>
-      <y>170</y>
-      <w>30</w>
-      <h>90</h>
+      <y>144</y>
+      <w>27</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
@@ -87,10 +87,10 @@ Save</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>130</y>
-      <w>270</w>
-      <h>30</h>
+      <x>495</x>
+      <y>108</y>
+      <w>243</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>250.0;10.0;10.0;10.0</additional_attributes>
@@ -98,10 +98,10 @@ Save</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>780</x>
-      <y>140</y>
-      <w>180</w>
-      <h>110</h>
+      <x>720</x>
+      <y>117</y>
+      <w>162</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>aws elastic search cluster
 --
@@ -112,10 +112,10 @@ single node
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>510</x>
-      <y>240</y>
-      <w>290</w>
-      <h>30</h>
+      <x>477</x>
+      <y>207</y>
+      <w>261</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;270.0;10.0</additional_attributes>
@@ -124,9 +124,9 @@ single node
     <id>Relation</id>
     <coordinates>
       <x>180</x>
-      <y>240</y>
-      <w>800</w>
-      <h>90</h>
+      <y>207</y>
+      <w>720</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 Delete</panel_attributes>
@@ -135,35 +135,34 @@ Delete</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>120</y>
-      <w>210</w>
-      <h>40</h>
+      <x>171</x>
+      <y>99</y>
+      <w>189</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-Send all queued</panel_attributes>
+Send all queued,
+timestamp then hash</panel_attributes>
     <additional_attributes>190.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>60</x>
-      <y>30</y>
-      <w>340</w>
-      <h>50</h>
+      <x>72</x>
+      <y>18</y>
+      <w>270</w>
+      <h>27</h>
     </coordinates>
-    <panel_attributes>Workstation
---
-Physically local backup folder (updates weekly)</panel_attributes>
+    <panel_attributes>Workstation</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>0</x>
-      <y>20</y>
-      <w>80</w>
-      <h>140</h>
+      <x>18</x>
+      <y>9</y>
+      <w>72</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 Type</panel_attributes>
@@ -172,10 +171,10 @@ Type</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>750</x>
-      <y>30</y>
-      <w>210</w>
-      <h>40</h>
+      <x>693</x>
+      <y>18</y>
+      <w>189</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>Hard Drive</panel_attributes>
     <additional_attributes/>
@@ -183,25 +182,37 @@ Type</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>390</x>
-      <y>10</y>
-      <w>380</w>
-      <h>40</h>
+      <x>324</x>
+      <y>0</y>
+      <w>387</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=.
-Physically separate versioned backup of backup folder</panel_attributes>
-    <additional_attributes>360.0;20.0;10.0;20.0</additional_attributes>
+Physically separate versioned backup</panel_attributes>
+    <additional_attributes>410.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>390</x>
-      <y>70</y>
-      <w>310</w>
-      <h>200</h>
+      <x>333</x>
+      <y>36</y>
+      <w>333</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>lt=.
 Rebuild index</panel_attributes>
-    <additional_attributes>210.0;180.0;210.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>270.0;200.0;270.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>333</x>
+      <y>36</y>
+      <w>234</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-&gt;&gt;
+Get objects regularly - overwrite folder</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
