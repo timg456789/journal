@@ -1,6 +1,6 @@
 # Journal
 
-I want to make it so that encryption is required. I'm not sure how that will work with existing documents.
+Documents are saved to local storage on key press. Upon clicking the plus sign in the top right the document is saved to S3 then elasticsearch and removed from local storage. If S3 can't be reached you can continue to save documents and work offline. You have a 500,000k total character limit with an HTML5 browser. The documents will sync when the page loads with an internet connection or the sav button is pushed when internet is available. Once the documents are sent they can be searched with the magnifying glass. You may also view a list of every document by date, click to view the full text, and delete, but not modify documents. You must enter the document's date if you  wish to delete it. The search index needs to be rebuilt from the script. The UI refresh button is intended to launch the rebuild script, but with a warning, because you may only want to rebuild once a month just so you don't ever have to really worry about data loss. You just have that layer. of maybe 14 days. The S3 delete is intended to be a soft delete, but more testing is needed with the sdk being used.
 
 ## Document
 
@@ -14,25 +14,10 @@ I want to make it so that encryption is required. I'm not sure how that will wor
 Documents are encrypted with [AES](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html) after uploading to S3. AES was chosen over other encryption algorithms, because AES is supported by [cross-region replication](http://docs.aws.amazon.com/AmazonS3/latest/dev/crr-what-is-isnot-replicated.html). KMS isn't. The hash in the document is made up as shown below.
     
     hash = md5(content + timestamp)
-   
-### Elastic Document Hash
-
-The hashes are to be pulled from elastic and their integrity monitored in a strong, but non-blocking way.
-
-    Document hash -> Hash of first doc
-    Document hash -> Hash of first doc + hash of second doc
-
+  
 ## Supported Browsers (Latest Version)
-
 Safari
-
 Chrome
-
-HTML5 for basic functionality
-
-## Save Routine
-
-Documents are first saved to local storage then deployed to s3. If s3 can't be reached, then the documents will be deployed later. When the documents are later deployed, the text will be deployed using whatever the current configuration is with the time from the original save.
 
 ### Save Legend
 
