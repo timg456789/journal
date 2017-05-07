@@ -1,18 +1,24 @@
 # Journal
 
-## Integrity
+## Document
 
-This isn't too far away with the ability to drill through a bucket now to get all objects. I want to put these into elasticsearch. Then monintor and if they ever go bad, then look into backing up.
+    {
+        "content":"test",
+        "time":"2017-05-07T01:56:31.924Z",
+        "hash":"3c7ca2c51704ba514a4b6dfbe0c55e4a"
+    }
+    
+### Encryption and Integrity
+Documents are encrypted with [AES](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html) after uploading to S3. AES was chosen over other encryption algorithms, because AES is supported by [cross-region replication](http://docs.aws.amazon.com/AmazonS3/latest/dev/crr-what-is-isnot-replicated.html). KMS isn't. The hash in the document is made up as shown below.
+    
+    hash = md5(content + timestamp)
+   
+### Elastic Document Hash
 
-Document -> Signature
-Document -> Signature -> Hash of Signatures
+The hashes are to be pulled from elastic and their integrity monitored in a strong, but non-blocking way.
 
-## Encryption
-Need to look a lot more into this and see what's supported with cross-region replication.
-
-http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
-
-Server-side encryption is about protecting data at rest. Using server-side encryption with customer-provided encryption keys (SSE-C) allows you to set your own encryption keys. With the encryption key you provide as part of your request, Amazon S3 manages both the encryption, as it writes to disks, and decryption, when you access your objects. Therefore, you don't need to maintain any code to perform data encryption and decryption. The only thing you do is manage the encryption keys you provide.
+    Document hash -> Hash of first doc
+    Document hash -> Hash of first doc + hash of second doc
 
 ## Supported Browsers (Latest Version)
 
