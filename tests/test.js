@@ -1,6 +1,6 @@
 const test = require('tape');
-const UrlParameter = require('../src/url-parameter');
-const Md5 = require('journal-library/src/md5');
+const UrlParameter = require('../src/library/url-parameter');
+const Md5 = require('../src/library/md5');
 var DocumentFactory = require('../src/library/document-factory');
 
 test('pluses are not converted to spaces', function (t) {
@@ -46,6 +46,6 @@ test('doc hash', function (t) {
     var docFactory = new DocumentFactory();
     var doc = docFactory.create('testing', '2017-05-07T04:07:07.469Z');
 
-    t.equal(doc.hash, '61522e4123d94b98275ef1a09aeb8799');
+    t.equal(doc.hash, undefined, 'hash is done at time of save when document is complete');
 });
 

@@ -7,16 +7,16 @@ function DocumentSave(esOptions, s3, bucket, context) {
 
     this.save = function (doc) {
         var options = {};
-        options.Bucket = bucket;
-        options.Key = doc.time;
+        options.Bucket = bucket;        options.Key = doc.time;
+
         options.Body = JSON.stringify(doc);
         options.ServerSideEncryption = 'AES256';
         options.ACL = 'bucket-owner-full-control';
-        options.Metadata = {'md5Hash': doc.hash}; // This works, but the callback in the sdk doesn't recognize the header.
+        doc.hash = new Md5().create(doc.content + doc.time);
+        options.Metadata = {'md5Hash': doc.hash};   // This works, but the callback in the sdk doesn't recognize the header.
                                                     // It's on new documents. Need to use manual requests.
                                                     // Then, I don't need to tamper with the actual message like below.
 
-        doc.hash = new Md5().create(doc.content + doc.time);
         esOptions.docTitle = doc.time;
 
         s3.upload(options, function (err) {
@@ -24,6 +24,7 @@ function DocumentSave(esOptions, s3, bucket, context) {
                 var msg = 'failure saving: ' + JSON.stringify(err, 0, 4);
                 var log = new Log();
                 log.add(msg);
+                context.fail(err);
             } else {
                 var search = new Search();
                 search.upload(esOptions, doc, context);
