@@ -1,10 +1,11 @@
-var DocumentSave = require('./document-save');
-var DocumentDelete = require('./document-delete');
-var docFactory = new DocumentFactory();
-var SaveIndicator = require('./save-indicator');
-var Log = require('./log');
-var DocumentFactory = require('journal-library/src/document-factory');
+const DocumentSave = require('./document-save');
+const DocumentDelete = require('./document-delete');
+const SaveIndicator = require('./save-indicator');
+const Log = require('./log');
+const DocumentFactory = require('journal-library/src/document-factory');
 const UUID = require('journal-library/src/UUID');
+
+var docFactory = new DocumentFactory();
 var uuid = new UUID();
 
 function HomeSave(s3, bucket, esOptions) {
