@@ -1,6 +1,12 @@
 # Journal
 
-Documents are saved to local storage on key press. Upon clicking the plus sign in the top right the document is saved to S3 then elasticsearch and removed from local storage. If S3 can't be reached you can continue to save documents and work offline. You have a 500,000k total character limit with an HTML5 browser. The documents will sync when the page loads with an internet connection or the save button is pushed when internet is available. Once the documents are sent they can be searched with the magnifying glass. You may also view a list of every document by date, click to view the full text, and delete, but not modify documents. You must enter the document's date if you  wish to delete it. The search index needs to be rebuilt from the script. The UI refresh button is intended to launch the rebuild script, but with a warning, because you may only want to rebuild once a month just so you don't ever have to really worry about data loss. You just have that layer. of maybe 14 days. The S3 delete is intended to be a soft delete, but more testing is needed with the sdk being used.
+## Delete
+
+You must enter the document's date if you  wish to delete it. **This should be the first 15 characters or something to confirm the contents instead.** The document is deleted from s3, but not elastic. When the elastic index is rebuilt, the files are finally deleted. **A backup should automatically be performed prior to rebuilding the indexes.** However within s3, the document is deleted from the main bucket only and no longer appears when listing the objects in the console or in the list objects call. The document may be viewed from the AWS console in the replicated bucket as deleted.
+
+## Save
+
+Documents are saved to local storage on key press. Upon clicking the plus sign in the top right the document is saved to S3 then elasticsearch and removed from local storage. If S3 can't be reached you can continue to save documents and work offline. You have a 500,000k total character limit with an HTML5 browser. The documents will sync when the page loads with an internet connection or the save button is pushed when internet is available. Once the documents are sent they can be searched with the magnifying glass. You may also view a list of every document by date, click to view the full text, and delete, but not modify documents.
 
 ## Document
 

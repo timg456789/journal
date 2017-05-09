@@ -17,9 +17,7 @@ function HomeSave(s3, bucket, esOptions) {
     var log = new Log();
 
     function removeFromLocal(itemKey) {
-        log.add('removing locally: ' + itemKey);
         localStorage.removeItem(itemKey);
-
         that.updateLocalCount();
     }
 
@@ -39,7 +37,6 @@ function HomeSave(s3, bucket, esOptions) {
     function saveToRemote(doc) {
         var context = {};
         context.succeed = function () {
-            log.add('setting saved to remote');
             saveIndicator.setConnectivitySavedToRemote();
             removeFromLocal(doc.time);
         };
@@ -51,7 +48,7 @@ function HomeSave(s3, bucket, esOptions) {
         documentSave.save(doc);
     }
 
-    function deleteClick(key) {
+    function deleteClick(key, continuationToken) {
         return function () {
 
             var menuId = uuid.create();
@@ -98,19 +95,21 @@ function HomeSave(s3, bucket, esOptions) {
                     journalDelete.removeAttr('disabled');
                 }
             });
-
             journalDelete.click(function () {
                 if (confirmationInput.val() === key) {
                     var documentDelete = new DocumentDelete(s3, bucket);
                     var deletePromise = documentDelete.deletePromise(key);
                     deletePromise.then(function (deleteResponse) {
                         // Null here, switch back to callbacks.
-                        // However the file deletes.
-                        $('#' + menuId + ' .feedback').html('Deleted: ' + key /*deleteResponse.VersionId*/)
+                        // However the file deletes deleteResponse.VersionId
+                        $('#' + menuId + ' .feedback')
+                            .html('Deleted: ' + key)
                             .addClass('bg-success');
+                        that.loadEntries(continuationToken); // this should actually be the page before.
+
                     }).catch(function (err) {
                         $('#' + menuId + ' .feedback').html('Failed to delete: ' + JSON.stringify(err, 0, 4));
-                        log.add(err);
+                        log.add('error deleting: ' + JSON.stringify(err));
                     });
                 }
             });
@@ -123,7 +122,6 @@ function HomeSave(s3, bucket, esOptions) {
     this.saveInputToLocal = function () {
         var docText = $('#input').val().trim();
         doc.content = docText;
-        log.add('saving locally: ' + docText);
 
         var docJson = JSON.stringify(doc);
         localStorage.setItem(doc.time, docJson);
@@ -168,7 +166,7 @@ function HomeSave(s3, bucket, esOptions) {
                 getParams.Bucket = bucket;
                 getParams.Key = data.Contents[objectIndex].Key;
                 entry.click(showEntryInInput(s3, getParams));
-                entryDelete.click(deleteClick(getParams.Key));
+                entryDelete.click(deleteClick(getParams.Key, continuationToken));
             }
 
             var viewMoreEntries = $('.view-more-journal-entries');
