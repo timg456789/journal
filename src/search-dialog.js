@@ -12,10 +12,9 @@ function SearchDialog() {
     }
 
     this.init = function (endpoint, index, docType) {
-        $(function () {
+        $(function () { // There is something occurring with the nesting even though everything is already wrapped by this same ready function.
             $('[data-toggle="popover"]').popover();
         });
-
         var searchInputHtml = '<input type="text" id="search-input" />';
         searchInputHtml += '<div id="search-results"></div>';
         var searchPopOverOptions = {
@@ -24,7 +23,9 @@ function SearchDialog() {
             "html": true
         };
 
-        $('#search').popover(searchPopOverOptions);
+        $('#search').popover(searchPopOverOptions)
+            .data('bs.popover')
+            .tip().addClass('search-popover');
         $('#search').click(function () {
             $('#search').popover('show');
             $('#search-input').focus();

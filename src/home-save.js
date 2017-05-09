@@ -148,7 +148,7 @@ function HomeSave(s3, bucket, esOptions) {
 
             for(objectIndex = 0; objectIndex < data.Contents.length; objectIndex +=1) {
                 entryId = 'entry-key-' + data.Contents[objectIndex].Key;
-                entryDelete = $('<button class="btn btn-warning">Delete</button>');
+                entryDelete = $('<button class="btn btn-danger">Delete</button>');
                 entry = $('<div id="' + entryId + '" ' +
                     'class="btn btn-default journal-entry-listing">' +
                     data.Contents[objectIndex].Key +

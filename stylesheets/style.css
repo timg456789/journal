@@ -55,6 +55,10 @@ h3 > .btn-success {
     cursor: pointer;
 }
 
+.search-popover {
+    max-width: 90%;
+}
+
 #search-input, #search-results {
     color: black;
 }

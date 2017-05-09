@@ -1,6 +1,6 @@
 var Home = require('./home');
 
-$(document).ready(function () {
+$(function () {
     'use strict';
 
     var home = new Home();
