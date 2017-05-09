@@ -14,6 +14,8 @@ Documents are saved to local storage on key press. Upon clicking the plus sign i
 Documents are encrypted with [AES](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html) after uploading to S3. AES was chosen over other encryption algorithms, because AES is supported by [cross-region replication](http://docs.aws.amazon.com/AmazonS3/latest/dev/crr-what-is-isnot-replicated.html). KMS isn't. The hash in the document is made up as shown below.
     
     hash = md5(content + timestamp)
+    
+Lots of improvements here. The hash needs to go into metadata. I want to the entire thing.
   
 ## Supported Browsers (Latest Version)
 Safari

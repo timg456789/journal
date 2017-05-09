@@ -17,4 +17,3 @@ function UrlParameter() {
 }
 
 module.exports = UrlParameter;
-

@@ -7,8 +7,8 @@ function DocumentSave(esOptions, s3, bucket, context) {
 
     this.save = function (doc) {
         var options = {};
-        options.Bucket = bucket;        options.Key = doc.time;
-
+        options.Bucket = bucket;
+        options.Key = doc.time;
         options.Body = JSON.stringify(doc);
         options.ServerSideEncryption = 'AES256';
         options.ACL = 'bucket-owner-full-control';

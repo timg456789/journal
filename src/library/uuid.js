@@ -1,4 +1,5 @@
 function UUID() {
+    'use strict';
     
     function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
@@ -9,7 +10,7 @@ function UUID() {
     this.create = function () {
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
             s4() + '-' + s4() + s4() + s4();
-    }
+    };
 }
 
 module.exports = UUID;

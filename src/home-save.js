@@ -91,6 +91,14 @@ function HomeSave(s3, bucket, esOptions) {
                     journalDelete.removeAttr('disabled');
                 }
             });
+
+            confirmationInput.on('input', function (event) {
+                var checkingDate = confirmationInput.val();
+                if (checkingDate === key) {
+                    journalDelete.removeAttr('disabled');
+                }
+            });
+
             journalDelete.click(function () {
                 if (confirmationInput.val() === key) {
                     var documentDelete = new DocumentDelete(s3, bucket);
@@ -109,7 +117,7 @@ function HomeSave(s3, bucket, esOptions) {
             $('#' + menuId).modal({
                 backdrop: 'static'
             });
-        }
+        };
     }
 
     this.saveInputToLocal = function () {
@@ -163,12 +171,9 @@ function HomeSave(s3, bucket, esOptions) {
                 entryDelete.click(deleteClick(getParams.Key));
             }
 
-            $('#journal-entries').append(
-                '<div class="journal-entry-listing">' +
-                '<button class="btn btn-primary view-more-journal-entries">View More</button>' +
-                '</div>');
-
-            $('.view-more-journal-entries').click(function () {
+            var viewMoreEntries = $('.view-more-journal-entries');
+            viewMoreEntries.unbind('click');
+            viewMoreEntries.click(function () {
                 that.loadEntries(continuationToken);
             });
 

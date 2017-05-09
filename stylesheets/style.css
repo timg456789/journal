@@ -92,9 +92,13 @@ h3 > .btn-success {
     line-height: 1.5em;
 }
 
+.journal-entries-container {
+    width: 100%;
+    text-align: center;
+}
+
 #journal-entries {
     cursor: pointer;
-    text-align: center;
     font-family: arial;
 }
 

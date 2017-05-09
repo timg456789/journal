@@ -58,7 +58,11 @@ function Home() {
         saveIndicator.setConnectivityAvailable(navigator.onLine);
         if (navigator.onLine) {
             homeSave.saveAllToRemote();
-            homeSave.loadEntries();
+
+            var viewMoreEntries = $('.view-more-journal-entries');
+            viewMoreEntries.click(function () {
+                homeSave.loadEntries();
+            });
         }
 
         $('#input').keypress(function() {
