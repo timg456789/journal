@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::00000000:user/journal",
+          "arn:aws:iam::00000000:role/service-role/timothys-journal-lambda-exec"
+        ]
+      },
+      "Action": "es:*",
+      "Resource": "arn:aws:es:us-east-1:00000000:domain/tgonzalez/*"
+    }
+  ]
+}

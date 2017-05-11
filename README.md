@@ -91,28 +91,8 @@ Green -> Dark Blue
 2. Grant the `AmazonESFullAccess` policy to the new IAM user.
     a. Adding permissions through the canned template didn't work after much troubleshooting and the policies take about 15 minutes to change and debug any chages to the template. It's suggested to assign permissions directly through IAM for this reason.
 
-3. Grant a trusted IP address access to the elastic search domain. This grants master access for manipulating documents.
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "",
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "*" /*permissions here appear to do nothing*/
-      },
-      "Action": "es:*",
-      "Resource": "arn:aws:es:us-east-1:00000000:domain/your-elastic-domain/*",
-      "Condition": {
-        "IpAddress": {
-          "aws:SourceIp": "192.168.0.9"
-        }
-      }
-    }
-  ]
-}
-```
+3. Grant a trusted IP address access to the elastic search domain. This grants master access for manipulating documents. [Role and user based policy](https://timg456789.github.io/journal/docs/elasticsearch-access-policy-ip.json) example. [Ip based policy](https://timg456789.github.io/journal/docs/elasticsearch-access-policy-user-and-role.json) example.
+
 4. Create a lambda function.
     a. Trigger the lambda function on the event type `Object Created (All)` for the primary S3 bucket.
     b. Download, configure, then upload the sample project for elastic search from github.
