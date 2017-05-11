@@ -8,6 +8,10 @@ You must enter the document's date if you  wish to delete it. **This should be t
 
 Documents are saved to local storage on key press. Upon clicking the plus sign in the top right the document is saved to S3 then elasticsearch and removed from local storage. If S3 can't be reached you can continue to save documents and work offline. You have a 500,000k total character limit with an HTML5 browser. The documents will sync when the page loads with an internet connection or the save button is pushed when internet is available. Once the documents are sent they can be searched with the magnifying glass. You may also view a list of every document by date, click to view the full text, and delete, but not modify documents.
 
+[Save Legend](https://timg456789.github.io/journal/docs/save-legend.md)
+
+![Save Flow](https://timg456789.github.io/journal/docs/save-flow.jpg)
+
 ## Document
 
     {
@@ -17,45 +21,16 @@ Documents are saved to local storage on key press. Upon clicking the plus sign i
     }
     
 ### Encryption and Integrity
-Documents are encrypted with [AES](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html) after uploading to S3. AES was chosen over other encryption algorithms, because AES is supported by [cross-region replication](http://docs.aws.amazon.com/AmazonS3/latest/dev/crr-what-is-isnot-replicated.html). KMS isn't. The hash in the document is made up as shown below.
+Documents are encrypted with [AES](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html) after uploading to S3. AES was chosen over other encryption algorithms, because AES is supported by [cross-region replication](http://docs.aws.amazon.com/AmazonS3/latest/dev/crr-what-is-isnot-replicated.html). The hash in the document is made up as shown below.
     
     hash = md5(content + timestamp)
     
-Lots of improvements here. The hash needs to go into metadata. I want to the entire thing.
+*This is preferred over hashing the entire document, because there is room for additional metadata like a previous hash.*
   
 ## Supported Browsers (Latest Version)
-Safari
+Safari(iPhone)
+
 Chrome
-
-### Save Legend
-
-Red = connected
-
-Green = no connection
-
-Orange = unsaved changes
-
-Light Blue = saved locally
-
-Dark Blue = saved remotely
-
-### Save with No Connection
-
-Red -> Orange -> Light Blue
-
-### Save with Connection
-
-Green -> Orange -> Light Blue -> Dark Blue
-
-### No Connection with Existing Documents on Load
-
-Red
-
-### Connection with Existing Documents on Load
-
-Green -> Dark Blue
-
-![Save Flow](https://timg456789.github.io/journal/docs/save-flow.jpg)
 
 ## Getting Started
 
